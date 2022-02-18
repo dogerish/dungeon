@@ -20,7 +20,6 @@ public class Map {
             if (nextIndex < 0) System.out.println("Error: Missing rows");
             String line = layout.substring(lastIndex + 1, lastIndex = nextIndex);
             if (line.length() != w) System.out.println("Warning: line " + y + " has wrong width");
-            System.out.println(line);
             for (int x = 0; x < w; x++)
             {
                 if (line.charAt(x) == ' ') data[y*w + x] = BLANKTIER;
