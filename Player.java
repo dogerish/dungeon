@@ -4,7 +4,7 @@ public class Player {
     Scanner sc;
     boolean gameOver = false;
     int health;
-    Map map = new Map(5, 3, "3 223;201  ; 233 ;");
+    Map map = new Map(4, 4, "32  ;21  ;1012; 2 3;");
     int maxHealth = 100;
     Debuff debuff = new Debuff();
     int numScales = 0, numTeeth = 0, numClubs = 0, numWands = 0;
@@ -45,8 +45,8 @@ public class Player {
             String direction = sc.nextLine();
             switch (direction)
             {
-                case "up":    valid = map.goUp(); break;
-                case "down":  valid = map.goDown(); break;
+                case "up":    valid = map.goUp();    break;
+                case "down":  valid = map.goDown();  break;
                 case "left":  valid = map.goLeft();  break;
                 case "right": valid = map.goRight(); break;
                 default: break;
@@ -177,7 +177,7 @@ public class Player {
         //Checks if you have enough gold upon completion of an exit room (tier 3)
         if (map.getRoom() == map.maxTier)
         {
-            if (gold >= 10) {
+            if (gold >= map.goldNecessary) {
                 boolean valid = false;
                 while (!valid) {
                     System.out.print("Would you like to exit the dungeon? (yes/no) ");
@@ -192,7 +192,7 @@ public class Player {
                     }
                 }
             }
-            else System.out.println("You need 10 gold to exit the Dungeon.");
+            else System.out.println("You need " + map.goldNecessary + " gold to exit the Dungeon.");
         }
     }
 }
