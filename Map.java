@@ -5,16 +5,21 @@ public class Map {
     static final int BLANKTIER = -1;
     int maxTier = 3;
     Tier tiers[] = new Tier[maxTier];
+    int goldNecessary;
 
     public Map(int w, int h, String layout)
     {
         this.w = w;
         this.h = h;
+        goldNecessary = maxTier+w+h;
         data = new int[w*h];
         int lastIndex = -1;
         for (int y = 0; y < h; y++)
         {
-            String line = layout.substring(lastIndex + 1, lastIndex = layout.indexOf(';', lastIndex + 1));
+            int nextIndex = layout.indexOf(';', lastIndex + 1);
+            if (nextIndex < 0) System.out.println("Error: Missing rows");
+            String line = layout.substring(lastIndex + 1, lastIndex = nextIndex);
+            if (line.length() != w) System.out.println("Warning: line " + y + " has wrong width");
             System.out.println(line);
             for (int x = 0; x < w; x++)
             {
